@@ -57,16 +57,16 @@ An MCP server that lets LLMs interact with your Clockify workspace for time-trac
 
 ### 2. Configure Your LLM Client
 
-#### Kiro CLI
+#### Kiro CLI (local)
 
-Add the following to your project's `.kiro/settings/mcp.json`:
+Clone the repo and add the following to your project's `.kiro/settings/mcp.json` (or your global ~/.kiro/settings/mcp.json):
 
 ```json
 {
   "mcpServers": {
     "clockify": {
-      "command": "node",
-      "args": ["./clockify-mcp/build/index.js"],
+      "command": "/path/to/node",
+      "args": ["/path/to/clockify-mcp/build/index.js"],
       "env": {
         "CLOCKIFY_API_KEY": "<YOUR_API_KEY>"
       }
@@ -74,7 +74,24 @@ Add the following to your project's `.kiro/settings/mcp.json`:
   }
 }
 ```
+Or `docker pull ghcr.io/<REPO_USER>/clockify-mcp:latest` and use  
 
+```json
+{
+  "mcpServers": {
+    "clockify": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e", "CLOCKIFY_API_KEY=<YOUR_API_KEY>",
+        "ghcr.io/<REPO_USER>/clockify-mcp:latest"  
+      ]
+    }
+  }
+}
+```
 #### Cursor / Claude Desktop (Docker)
 
 Add to your `settings.json`:
