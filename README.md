@@ -1,5 +1,5 @@
 [![Build Status](../actions/workflows/docker-publish.yml/badge.svg?branch=main)](actions/workflows/docker-publish.yml)
-[![Docker Image](https://img.shields.io/badge/ghcr.io-wwwslinger%2Fclockify--mcp-blue?logo=docker)](https://../../packages/container/package/clockify-mcp)
+[![Docker Image](https://img.shields.io/badge/ghcr.io-wwwslinger%2Fclockify--mcp-blue?logo=docker)](../../packages/container/package/clockify-mcp)
 
 <a href="https://glama.ai/mcp/servers/@wwwslinger/clockify-mcp">
   <img width="380" height="200" src="https://glama.ai/mcp/servers/@wwwslinger/clockify-mcp/badge" alt="Clockify MCP server" />
