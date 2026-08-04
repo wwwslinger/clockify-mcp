@@ -166,7 +166,10 @@ describe("addTimeEntry", () => {
     mockUser();
     fetchMock.mockResolvedValueOnce({
       ok: true,
-      json: async () => ({ id: "te3", timeInterval: { start: "2024-01-01T09:00:00Z", end: null } }),
+      json: async () => ({
+        id: "te3",
+        timeInterval: { start: "2024-01-01T09:00:00Z", end: null },
+      }),
     });
     const result = await callToolHandler({
       params: {
@@ -219,7 +222,10 @@ describe("updateTimeEntry", () => {
         tagIds: [],
         projectId: "p1",
         taskId: null,
-        timeInterval: { start: "2024-01-01T09:00:00Z", end: "2024-01-01T10:00:00Z" },
+        timeInterval: {
+          start: "2024-01-01T09:00:00Z",
+          end: "2024-01-01T10:00:00Z",
+        },
       }),
     });
     // PUT update
@@ -397,7 +403,10 @@ describe("getSummaryReport", () => {
     await callToolHandler({
       params: {
         name: "getSummaryReport",
-        arguments: { start: "2024-01-01T00:00:00Z", end: "2024-01-31T23:59:59Z" },
+        arguments: {
+          start: "2024-01-01T00:00:00Z",
+          end: "2024-01-31T23:59:59Z",
+        },
       },
     });
     const body = JSON.parse(fetchMock.mock.calls[1][1].body);

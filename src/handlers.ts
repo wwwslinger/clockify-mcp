@@ -20,9 +20,7 @@ async function clockifyFetch(
   baseUrl: string = MAIN_API_BASE,
 ) {
   const apiKey = getApiKey();
-  const url = endpoint.startsWith("http")
-    ? endpoint
-    : `${baseUrl}${endpoint}`;
+  const url = endpoint.startsWith("http") ? endpoint : `${baseUrl}${endpoint}`;
   const headers = {
     "X-Api-Key": apiKey,
     "Content-Type": "application/json",
@@ -41,7 +39,10 @@ async function clockifyFetch(
 }
 
 // Helper to call the Clockify Reports API (separate subdomain)
-async function clockifyReportsFetch(endpoint: string, options: RequestInit = {}) {
+async function clockifyReportsFetch(
+  endpoint: string,
+  options: RequestInit = {},
+) {
   return clockifyFetch(endpoint, options, REPORTS_API_BASE);
 }
 
@@ -134,8 +135,7 @@ export async function listToolsHandler() {
             },
             taskId: {
               type: "string",
-              description:
-                "Task ID (optional, requires projectId to be set)",
+              description: "Task ID (optional, requires projectId to be set)",
             },
             description: {
               type: "string",
@@ -320,7 +320,7 @@ export async function listToolsHandler() {
                 ],
               },
               description:
-                "Up to 3 grouping levels (default: [\"USER\", \"PROJECT\"])",
+                'Up to 3 grouping levels (default: ["USER", "PROJECT"])',
             },
             userIds: {
               type: "array",
@@ -477,11 +477,15 @@ interface MCPCallToolRequest {
 }
 
 // Build a query string from a params object, skipping undefined/null values
-function buildQuery(params: Record<string, string | number | boolean | undefined>): string {
+function buildQuery(
+  params: Record<string, string | number | boolean | undefined>,
+): string {
   const parts: string[] = [];
   for (const [key, value] of Object.entries(params)) {
     if (value !== undefined && value !== null && value !== "") {
-      parts.push(`${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`);
+      parts.push(
+        `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`,
+      );
     }
   }
   return parts.length ? `?${parts.join("&")}` : "";
@@ -542,7 +546,8 @@ export async function callToolHandler(request: MCPCallToolRequest) {
     }
 
     case "addTimeEntry": {
-      const { projectId, taskId, description, start, end, billable, tagIds } = args;
+      const { projectId, taskId, description, start, end, billable, tagIds } =
+        args;
       if (!start || typeof start !== "string") {
         throw new Error("start is required (ISO8601 string)");
       }
@@ -587,7 +592,10 @@ export async function callToolHandler(request: MCPCallToolRequest) {
         `/workspaces/${workspaceId}/time-entries/${timeEntryId}`,
       );
       const body: Record<string, unknown> = {
-        start: typeof start === "string" && start ? start : existing.timeInterval?.start,
+        start:
+          typeof start === "string" && start
+            ? start
+            : existing.timeInterval?.start,
         end: typeof end === "string" && end ? end : existing.timeInterval?.end,
         description:
           typeof description === "string"
@@ -602,10 +610,10 @@ export async function callToolHandler(request: MCPCallToolRequest) {
             ? taskId
             : (existing.taskId ?? null),
         billable:
-          typeof billable === "boolean" ? billable : (existing.billable ?? false),
-        tagIds: Array.isArray(tagIds)
-          ? tagIds
-          : (existing.tagIds ?? []),
+          typeof billable === "boolean"
+            ? billable
+            : (existing.billable ?? false),
+        tagIds: Array.isArray(tagIds) ? tagIds : (existing.tagIds ?? []),
       };
       const updated = await clockifyFetch(
         `/workspaces/${workspaceId}/time-entries/${timeEntryId}`,
@@ -746,7 +754,10 @@ export async function callToolHandler(request: MCPCallToolRequest) {
         dateRangeEnd: end,
         detailedFilter: {
           page: typeof page === "number" ? page : 1,
-          pageSize: Math.min(typeof pageSize === "number" ? pageSize : 50, 1000),
+          pageSize: Math.min(
+            typeof pageSize === "number" ? pageSize : 50,
+            1000,
+          ),
           sortColumn: "DATE",
         },
         sortOrder: "ASCENDING",
@@ -787,9 +798,7 @@ export async function callToolHandler(request: MCPCallToolRequest) {
         `/workspaces/${workspaceId}/users?page-size=500`,
       );
       const userMatch = users.find(
-        (u) =>
-          u.name &&
-          u.name.toLowerCase().includes(userName.toLowerCase()),
+        (u) => u.name && u.name.toLowerCase().includes(userName.toLowerCase()),
       );
       if (!userMatch) {
         throw new Error(`No user found matching name: ${userName}`);
