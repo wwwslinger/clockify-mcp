@@ -1,5 +1,5 @@
-[![Build Status](https://github.com/wwwslinger/clockify-mcp/actions/workflows/docker-publish.yml/badge.svg?branch=main)](https://github.com/wwwslinger/clockify-mcp/actions/workflows/docker-publish.yml)
-[![Docker Image](https://img.shields.io/badge/ghcr.io-wwwslinger%2Fclockify--mcp-blue?logo=docker)](https://github.com/users/wwwslinger/packages/container/package/clockify-mcp)
+[![Build Status](https://../../actions/workflows/docker-publish.yml/badge.svg?branch=main)](https://../..//clockify-mcp/actions/workflows/docker-publish.yml)
+[![Docker Image](https://img.shields.io/badge/ghcr.io-wwwslinger%2Fclockify--mcp-blue?logo=docker)](https://../../packages/container/package/clockify-mcp)
 
 <a href="https://glama.ai/mcp/servers/@wwwslinger/clockify-mcp">
   <img width="380" height="200" src="https://glama.ai/mcp/servers/@wwwslinger/clockify-mcp/badge" alt="Clockify MCP server" />
@@ -87,7 +87,7 @@ Add to your `settings.json`:
       "args": [
         "run", "-i", "--rm",
         "-e", "CLOCKIFY_API_KEY=<YOUR_API_KEY>",
-        "ghcr.io/wwwslinger/clockify-mcp:latest"
+        "ghcr.io/<REPO_USER>/clockify-mcp:latest"
       ]
     }
   }
@@ -165,10 +165,10 @@ How many hours did I log to Globex in July?
 
 ## Docker Image
 
-- **Image:** `ghcr.io/wwwslinger/clockify-mcp:latest`
+- **Image:** `ghcr.io/<REPO_USER>/clockify-mcp:latest`
 - **Pull:**
   ```bash
-  docker pull ghcr.io/wwwslinger/clockify-mcp:latest
+  docker pull ghcr.io/<REPO_USER>/clockify-mcp:latest
   ```
 
 Published automatically via GitHub Actions on every push to `main`.
